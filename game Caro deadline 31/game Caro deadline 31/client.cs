@@ -25,7 +25,7 @@ namespace game_Caro_deadline_31
         public static string namePlayer;
        private string IP = "127.0.0.1";
         private int Port = 9999;
-        private Socket Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        public static Socket Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public client()
         {
             InitializeComponent();
