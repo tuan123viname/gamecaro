@@ -83,7 +83,16 @@ namespace game_Caro_deadline_31
             var item = e.Item;
             string ip= listIpUser[item.Index];
             int port =listPortUser[item.Index];
-
+            //---------------------------------
+            if (client.Client.Connected == true)
+            {
+                string playString = "P:" + client.Client.LocalEndPoint.ToString() + ":" + ip + ":" + port;
+                byte[] byteSend = Encoding.ASCII.GetBytes(playString);
+                client.Client.Send(byteSend);
+                client.Client.Disconnect(true);
+                client.Client.Close();
+            }
+            //---------------------------------
         }
     }
 }

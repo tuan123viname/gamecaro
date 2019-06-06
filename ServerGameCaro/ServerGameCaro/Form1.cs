@@ -93,6 +93,19 @@ namespace ServerGameCaro
                 {
                     byte[] byteReceive = new byte[1024];
                     client.Receive(byteReceive);
+                    //---------------------------------
+                    string rcvString = Encoding.ASCII.GetString(byteReceive);
+                    if (rcvString[0] == 'P')
+                    {
+                        string[] arrString = rcvString.Split(':');
+                        string ip1 = arrString[1];
+                        string port1 = arrString[2];
+                        string ip2 = arrString[3];
+                        string port2 = arrString[4];
+
+                        return;
+                    }
+                    //---------------------------------
                     object data = DeserializeData(byteReceive);
                     Point point = (Point)data;
                     MessageBox.Show(point.X.ToString(), point.Y.ToString());
