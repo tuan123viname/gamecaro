@@ -103,6 +103,16 @@ namespace ServerGameCaro
                         string ip2 = arrString[3];
                         string port2 = arrString[4];
 
+                        byte[] byteSend = new byte[1024];
+                        byteSend = SerializeData("P:" + client.RemoteEndPoint.ToString());
+                        foreach (Socket s in ListSocket)
+                        {
+                            if (s.RemoteEndPoint.ToString() == ip2 + ":" + port2)
+                            {
+                                s.Send(byteSend);
+                            }
+                        }
+
                         return;
                     }
                     //---------------------------------

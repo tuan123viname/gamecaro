@@ -83,8 +83,16 @@ namespace game_Caro_deadline_31
                     if (byteReceive != null)
                     {
                         object obj = DeserializeData(byteReceive);
+                        string rcvString = (string)obj;
 
-                        listUser.Add((string)obj);
+                        //----------------------------------------------
+                        if (rcvString[0] == 'P')
+                        {
+                            //Mở form bàn cờ, kết nối đến người chơi đóng vai trò server bằng ip, port trong rcvString
+                        }
+                        //----------------------------------------------
+
+                        listUser.Add(rcvString);
 
                     }
                     splitString();

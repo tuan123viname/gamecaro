@@ -91,6 +91,10 @@ namespace game_Caro_deadline_31
                 client.Client.Send(byteSend);
                 client.Client.Disconnect(true);
                 client.Client.Close();
+
+                //...
+                //Người bấm nút sẽ đóng vai trò server, mở form bàn cờ rồi tạo luôn server
+                //...
             }
             //---------------------------------
         }
