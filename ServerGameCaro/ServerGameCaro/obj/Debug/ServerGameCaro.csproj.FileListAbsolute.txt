@@ -8,3 +8,13 @@ C:\Users\COMPUTER\source\repos\gameCaro\ServerGameCaro\ServerGameCaro\obj\Debug\
 C:\Users\COMPUTER\source\repos\gameCaro\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.csproj.CoreCompileInputs.cache
 C:\Users\COMPUTER\source\repos\gameCaro\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.exe
 C:\Users\COMPUTER\source\repos\gameCaro\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.pdb
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\bin\Debug\ServerGameCaro.exe.config
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\bin\Debug\ServerGameCaro.exe
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\bin\Debug\ServerGameCaro.pdb
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.csprojResolveAssemblyReference.cache
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.Server.resources
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.Properties.Resources.resources
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.csproj.GenerateResource.Cache
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.csproj.CoreCompileInputs.cache
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.exe
+D:\THÁI AN\Git\ServerGameCaro\ServerGameCaro\obj\Debug\ServerGameCaro.pdb

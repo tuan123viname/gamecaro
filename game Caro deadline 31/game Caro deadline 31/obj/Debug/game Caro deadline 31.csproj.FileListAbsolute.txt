@@ -22,3 +22,15 @@ C:\Users\COMPUTER\source\repos\gameCaro\game Caro deadline 31\game Caro deadline
 C:\Users\COMPUTER\source\repos\gameCaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.CoreCompileInputs.cache
 C:\Users\COMPUTER\source\repos\gameCaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.exe
 C:\Users\COMPUTER\source\repos\gameCaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.pdb
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe.config
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.pdb
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.client.resources
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.chessBoard.resources
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.Properties.Resources.resources
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.room.resources
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.GenerateResource.Cache
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.CoreCompileInputs.cache
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.exe
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.pdb
+D:\THÁI AN\Git\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csprojResolveAssemblyReference.cache

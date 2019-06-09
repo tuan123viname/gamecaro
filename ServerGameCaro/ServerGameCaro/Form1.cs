@@ -68,20 +68,38 @@ namespace ServerGameCaro
         {
             if (obj != null)
             {
-                Socket sk = (Socket)obj;
+                //Socket sk = (Socket)obj;
+                //byte[] byteSend = new byte[1024];
+                //    byteSend=SerializeData(sk.RemoteEndPoint.ToString());
+                //try
+                //{
+                //    sk.Send(byteSend);
+                //}
+                //catch
+                //{
+
+                //}
+
+                string[] listUser = new string[ListSocket.Count];
+                for (int i = 0; i < ListSocket.Count; i++)
+                {
+                    listUser[i] = ListSocket[i].RemoteEndPoint.ToString();
+                }
                 byte[] byteSend = new byte[1024];
-                    byteSend=SerializeData(sk.RemoteEndPoint.ToString());
+                byteSend = SerializeData(listUser);
                 try
                 {
-                   
-                    sk.Send(byteSend);
+                    foreach(Socket s in ListSocket)
+                    {
+                        s.Send(byteSend);
+                    }
                 }
                 catch
                 {
 
                 }
             }
-           
+
         }
 
         void receiveHandler(object obj)
@@ -103,8 +121,12 @@ namespace ServerGameCaro
                         string ip2 = arrString[3];
                         string port2 = arrString[4];
 
+                        MessageBox.Show(ip1 + "\r\n" + port1 + "\r\n" + ip2 + "\r\n" + port2);
+
                         byte[] byteSend = new byte[1024];
-                        byteSend = SerializeData("P:" + client.RemoteEndPoint.ToString());
+                        string[] sendString = new string[1];
+                        sendString[0] = "P:" + client.RemoteEndPoint.ToString();
+                        byteSend = SerializeData(sendString);
                         foreach (Socket s in ListSocket)
                         {
                             if (s.RemoteEndPoint.ToString() == ip2 + ":" + port2)
