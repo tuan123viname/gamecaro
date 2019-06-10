@@ -93,6 +93,7 @@ namespace game_Caro_deadline_31
                         }
                         //----------------------------------------------
 
+                        listUser.Clear();
                         foreach (string str in rcvString)
                         {
                             listUser.Add(str);

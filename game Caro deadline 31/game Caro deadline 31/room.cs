@@ -78,7 +78,10 @@ namespace game_Caro_deadline_31
             {
 
                 //listView1.Items.Add(listIpUser[i]+listPortUser[i]);
-                listView1.Items.Add(listUser[i]);
+                if (listUser[i] != client.Client.LocalEndPoint.ToString())
+                {
+                    listView1.Items.Add(listUser[i]);
+                }
             }
         }
 
