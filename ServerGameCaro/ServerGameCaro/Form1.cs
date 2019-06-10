@@ -143,8 +143,19 @@ namespace ServerGameCaro
                         byte[] byteSend = new byte[1024];
                         string[] sendString = new string[1];
                         rcvString = rcvString.Replace("\0", string.Empty);
-                        string ip_port_server = rcvString.Replace("Y:", string.Empty);
-                        ip_port_server = ip_port_server.Replace("N:", string.Empty);
+                        string ip_port_server;
+                        string removeString;
+                        if(rcvString[0] == 'Y')
+                        {
+                            ip_port_server = rcvString.Replace("Y:", string.Empty);
+                            removeString = "Y:";
+                            
+                        }
+                        else
+                        {
+                            ip_port_server = rcvString.Replace("N:", string.Empty);
+                            removeString = "N:";
+                        }
                         sendString[0] = rcvString;
                         byteSend = SerializeData(sendString);
                         foreach (Socket s in ListSocket)
@@ -152,6 +163,16 @@ namespace ServerGameCaro
                             if (s.RemoteEndPoint.ToString() == ip_port_server)
                             {
                                 s.Send(byteSend);
+                            }
+                        }
+                        if (removeString == "Y:")
+                        {
+                            foreach (Socket s in ListSocket)
+                            {
+                                if (s.RemoteEndPoint.ToString() == ip_port_server || s.RemoteEndPoint.ToString() == client.RemoteEndPoint.ToString())
+                                {
+                                    ListSocket.Remove(s);
+                                }
                             }
                         }
                     }

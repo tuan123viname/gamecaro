@@ -70,7 +70,6 @@ namespace game_Caro_deadline_31
         }
         void listenFromServer()
         {
-          
             while (true)
             {
                 try
@@ -98,6 +97,7 @@ namespace game_Caro_deadline_31
                                 acceptString = "Y:" + ip_port_server;
                                 byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
                                 Client.Send(byteSend);
+                                Client.Close();
                             }
                             else if (dialogResult == DialogResult.No)
                             {
@@ -112,6 +112,8 @@ namespace game_Caro_deadline_31
                         if (str[0] == 'Y')
                         {
                             //client.Client.Disconnect(true);
+                            //string ip_port_remove = str.Replace("Y:", string.Empty);
+
                             client.Client.Close();
                             MessageBox.Show("Nguoi choi da dong y ghep doi");
                             if (openedForm != null)
@@ -119,14 +121,16 @@ namespace game_Caro_deadline_31
                                 openedForm.Close();
                                 openedForm = null;
                             }
+
                             Form frm = new chessBoard();
-                            frm.Show();
-                            continue;
+                            frm.ShowDialog();
+
+                            break;
                         }
                         if (str[0] == 'N')
                         {
                             MessageBox.Show("Nguoi choi KHONG dong y ghep doi");
-                            continue;
+                            break;
                         }
                         //----------------------------------------------
 
@@ -146,6 +150,11 @@ namespace game_Caro_deadline_31
             }
         }
 
+        //void OpenChessBoard()
+        //{
+        //    Form frm = new chessBoard();
+        //    frm.Show();
+        //}
         public byte[] SerializeData(Object o)
         {
             MemoryStream ms = new MemoryStream();
@@ -170,18 +179,6 @@ namespace game_Caro_deadline_31
         private void client_Load(object sender, EventArgs e)
         {
             
-        }
-        void splitString()
-        {
-
-
-            for (int i = 0; i < listUser.Count(); i++)
-            {
-                string[] temp = listUser[i].Split(':');
-                IpUser.Add(temp[0]);
-                PortUser.Add(Int32.Parse(temp[1]));
-            }
-             
         }
         
     }
