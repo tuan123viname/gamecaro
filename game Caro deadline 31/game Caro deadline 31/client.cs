@@ -58,10 +58,7 @@ namespace game_Caro_deadline_31
                 // namePlayer = tb_PlayerName.Text.ToString();
                 //byte[] sentByte = Encoding.ASCII.GetBytes(namePlayer);
                 //client.Send(sentByte);
-                Point point = new Point(3, 5);
-                object obj = (object)point;
-                byte[] byteSend = SerializeData(obj);
-                Client.Send(byteSend);
+              
                 room form = new room();
                 form.Show();
             }
@@ -84,19 +81,39 @@ namespace game_Caro_deadline_31
                     {
                         object obj = DeserializeData(byteReceive);
                         string[] rcvString = (string[])obj;
-
                         //----------------------------------------------
-                        if (rcvString[0][0] == 'P')
+                        string str = rcvString[0];
+                        if (str[0] == 'P')
                         {
+                            string ip_port_server = rcvString[0];
+                            MessageBox.Show("accept");
+                            Form acc = new Accept(ip_port_server);
+                            acc.Show();
+                            send();
                             //Mở form bàn cờ, kết nối đến người chơi đóng vai trò server bằng ip, port trong rcvString
-                            return;
+                          //  return;
+                        }
+                        if (str[0] == 'Y')
+                        {
+                            client.Client.Disconnect(true);
+                            client.Client.Close();
+                            Form room = new room();
+                            room.Close();
+                            Form frm = new chessBoard();
+                            frm.Show();
+                            MessageBox.Show("Nguoi choi da dong y ghep doi");
+
+                        }
+                        if (str[0] == 'N')
+                        {
+                            MessageBox.Show("Nguoi choi KHONG dong y ghep doi");
                         }
                         //----------------------------------------------
 
                         listUser.Clear();
-                        foreach (string str in rcvString)
+                        foreach (string s in rcvString)
                         {
-                            listUser.Add(str);
+                            listUser.Add(s);
                         }
 
                     }
@@ -106,6 +123,20 @@ namespace game_Caro_deadline_31
                 {
 
                 }
+            }
+        }
+        public void send()
+        {
+            string[] arr = new string[1];
+            if (Accept.accept == 1)
+            {
+                arr[0] = "Y";
+                Client.Send(SerializeData(arr));
+            }
+            if (Accept.accept == 0)
+            {
+                arr[0] = "N";
+                Client.Send(SerializeData(arr));
             }
         }
         public byte[] SerializeData(Object o)

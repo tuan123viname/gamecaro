@@ -97,16 +97,30 @@ namespace game_Caro_deadline_31
                 string playString = "P:" + client.Client.LocalEndPoint.ToString() + ":" + ip_port[0] + ":" + ip_port[1];
                 byte[] byteSend = Encoding.ASCII.GetBytes(playString);
                 client.Client.Send(byteSend);
-                client.Client.Disconnect(true);
-                client.Client.Close();
-                this.Close();
+              //  client.Client.Disconnect(true);
+                //client.Client.Close();
+                //this.Close();
+
                 //...
-                Form frm = new chessBoard();
-                frm.Show();
+                
                 //Người bấm nút sẽ đóng vai trò server, mở form bàn cờ rồi tạo luôn server
                 //...
             }
+
+            //accept();
             //---------------------------------
+        }
+       void accept()
+        {
+            int kq = Accept.accept;
+            if (kq == 1)
+            {
+                Form frm = new chessBoard();
+                frm.Show();
+            }
+            else
+                MessageBox.Show("nguoi choi tu choi");
+           
         }
     }
 }

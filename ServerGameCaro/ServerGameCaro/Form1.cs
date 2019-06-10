@@ -120,16 +120,18 @@ namespace ServerGameCaro
                         string port1 = arrString[2];
                         string ip2 = arrString[3];
                         string port2 = arrString[4];
+                        port2 = port2.Replace("\0", string.Empty);
 
-                        MessageBox.Show(ip1 + "\r\n" + port1 + "\r\n" + ip2 + "\r\n" + port2);
+                        //MessageBox.Show(ip1 + "\r\n" + port1 + "\r\n" + ip2 + "\r\n" + port2);
 
                         byte[] byteSend = new byte[1024];
                         string[] sendString = new string[1];
                         sendString[0] = "P:" + client.RemoteEndPoint.ToString();
                         byteSend = SerializeData(sendString);
+                        string client2 = ip2 + ":" + port2;
                         foreach (Socket s in ListSocket)
                         {
-                            if (s.RemoteEndPoint.ToString() == ip2 + ":" + port2)
+                            if (s.RemoteEndPoint.ToString() == client2)
                             {
                                 s.Send(byteSend);
                             }
