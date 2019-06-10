@@ -48,6 +48,8 @@ namespace game_Caro_deadline_31
             load.Start(); 
 
         }
+
+        room openedForm = null;
         void Connect()
         {
             IPEndPoint iep = new IPEndPoint(IPAddress.Parse(IP), Port);
@@ -58,13 +60,12 @@ namespace game_Caro_deadline_31
                 // namePlayer = tb_PlayerName.Text.ToString();
                 //byte[] sentByte = Encoding.ASCII.GetBytes(namePlayer);
                 //client.Send(sentByte);
-              
-                room form = new room();
-                form.Show();
+                if (openedForm == null)
+                {
+                    openedForm = new room();
+                    openedForm.Show();
+                }
             }
-           
-               
-            
             //Client.Close();
         }
         void listenFromServer()
@@ -86,27 +87,46 @@ namespace game_Caro_deadline_31
                         if (str[0] == 'P')
                         {
                             string ip_port_server = rcvString[0];
-                            MessageBox.Show("accept");
-                            Form acc = new Accept(ip_port_server);
-                            acc.Show();
-                            send();
+                            ip_port_server = ip_port_server.Replace("P:", string.Empty);
+                            string acceptString = "";
+                            //MessageBox.Show("accept");
+                            //Form acc = new Accept(ip_port_server);
+                            //acc.Show();
+                            DialogResult dialogResult = MessageBox.Show("Người chơi " + ip_port_server + " muốn chơi cờ với bạn. Bạn có đồng ý không ?", "Thông báo", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                acceptString = "Y:" + ip_port_server;
+                                byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
+                                Client.Send(byteSend);
+                            }
+                            else if (dialogResult == DialogResult.No)
+                            {
+                                acceptString = "N:" + ip_port_server;
+                                byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
+                                Client.Send(byteSend);
+                            }
+                            continue;
                             //Mở form bàn cờ, kết nối đến người chơi đóng vai trò server bằng ip, port trong rcvString
                           //  return;
                         }
                         if (str[0] == 'Y')
                         {
-                            client.Client.Disconnect(true);
+                            //client.Client.Disconnect(true);
                             client.Client.Close();
-                            Form room = new room();
-                            room.Close();
+                            MessageBox.Show("Nguoi choi da dong y ghep doi");
+                            if (openedForm != null)
+                            {
+                                openedForm.Close();
+                                openedForm = null;
+                            }
                             Form frm = new chessBoard();
                             frm.Show();
-                            MessageBox.Show("Nguoi choi da dong y ghep doi");
-
+                            continue;
                         }
                         if (str[0] == 'N')
                         {
                             MessageBox.Show("Nguoi choi KHONG dong y ghep doi");
+                            continue;
                         }
                         //----------------------------------------------
 
@@ -125,20 +145,7 @@ namespace game_Caro_deadline_31
                 }
             }
         }
-        public void send()
-        {
-            string[] arr = new string[1];
-            if (Accept.accept == 1)
-            {
-                arr[0] = "Y";
-                Client.Send(SerializeData(arr));
-            }
-            if (Accept.accept == 0)
-            {
-                arr[0] = "N";
-                Client.Send(SerializeData(arr));
-            }
-        }
+
         public byte[] SerializeData(Object o)
         {
             MemoryStream ms = new MemoryStream();

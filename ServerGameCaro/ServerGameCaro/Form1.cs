@@ -136,13 +136,29 @@ namespace ServerGameCaro
                                 s.Send(byteSend);
                             }
                         }
-
-                        return;
+                        
+                    }
+                    if(rcvString[0] == 'Y' || rcvString[0] == 'N')
+                    {
+                        byte[] byteSend = new byte[1024];
+                        string[] sendString = new string[1];
+                        rcvString = rcvString.Replace("\0", string.Empty);
+                        string ip_port_server = rcvString.Replace("Y:", string.Empty);
+                        ip_port_server = ip_port_server.Replace("N:", string.Empty);
+                        sendString[0] = rcvString;
+                        byteSend = SerializeData(sendString);
+                        foreach (Socket s in ListSocket)
+                        {
+                            if (s.RemoteEndPoint.ToString() == ip_port_server)
+                            {
+                                s.Send(byteSend);
+                            }
+                        }
                     }
                     //---------------------------------
-                    object data = DeserializeData(byteReceive);
-                    Point point = (Point)data;
-                    MessageBox.Show(point.X.ToString(), point.Y.ToString());
+                    //object data = DeserializeData(byteReceive);
+                    //Point point = (Point)data;
+                    //MessageBox.Show(point.X.ToString(), point.Y.ToString());
                 }
                 catch
                 {

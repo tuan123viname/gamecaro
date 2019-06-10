@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accept.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Accept.Designer.cs">
-      <DependentUpon>Accept.cs</DependentUpon>
-    </Compile>
     <Compile Include="chessBoard_Manager.cs" />
     <Compile Include="client.cs">
       <SubType>Form</SubType>
@@ -77,9 +71,6 @@
       <DependentUpon>room.cs</DependentUpon>
     </Compile>
     <Compile Include="SocketData.cs" />
-    <EmbeddedResource Include="Accept.resx">
-      <DependentUpon>Accept.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="client.resx">
       <DependentUpon>client.cs</DependentUpon>
     </EmbeddedResource>

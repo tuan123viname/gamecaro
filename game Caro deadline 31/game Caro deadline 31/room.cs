@@ -107,20 +107,8 @@ namespace game_Caro_deadline_31
                 //...
             }
 
-            //accept();
             //---------------------------------
         }
-       void accept()
-        {
-            int kq = Accept.accept;
-            if (kq == 1)
-            {
-                Form frm = new chessBoard();
-                frm.Show();
-            }
-            else
-                MessageBox.Show("nguoi choi tu choi");
-           
-        }
+       
     }
 }
