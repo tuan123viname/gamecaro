@@ -101,6 +101,8 @@ namespace game_Caro_deadline_31
                 client.Client.Close();
                 this.Close();
                 //...
+                Form frm = new chessBoard();
+                frm.Show();
                 //Người bấm nút sẽ đóng vai trò server, mở form bàn cờ rồi tạo luôn server
                 //...
             }
