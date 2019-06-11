@@ -118,7 +118,7 @@ namespace game_Caro_deadline_31
                         {
                             //client.Client.Disconnect(true);
                             //string ip_port_remove = str.Replace("Y:", string.Empty);
-
+                            ipAndPort = str.Replace("Y", "S");
                             client.Client.Close();
                          //   MessageBox.Show("Nguoi choi da dong y ghep doi");
                             if (openedForm != null)

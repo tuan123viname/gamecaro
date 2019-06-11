@@ -98,13 +98,14 @@ namespace game_Caro_deadline_31
         }
         public void check()
         {
-            string[] ipAndPort;
-            if (room.ipAndPort!=null)
-              ipAndPort = room.ipAndPort.Split(':');
-            else
-            {
-                ipAndPort = client.ipAndPort.Split(':');
-            }
+            //string[] ipAndPort;
+            //if (room.ipAndPort!=null)
+            //  ipAndPort = room.ipAndPort.Split(':');
+            //else
+            //{
+            //    ipAndPort = client.ipAndPort.Split(':');
+            //}
+            string[] ipAndPort = client.ipAndPort.Split(':');
             string ip = ipAndPort[1];
             int port = Int32.Parse(ipAndPort[2]);
             if(ipAndPort[0]=="S")
@@ -134,9 +135,11 @@ namespace game_Caro_deadline_31
 
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
             Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            try { Client.Connect(ipep); }
-            catch { };
-           
+            while (Client.Connected == false)
+            {
+                try { Client.Connect(ipep); }
+                catch { };
+            }
        
         }
         public void listenClient()
