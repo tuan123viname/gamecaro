@@ -47,3 +47,15 @@ D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Ca
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.exe
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.pdb
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.Accept.resources
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe.config
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.pdb
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csprojAssemblyReference.cache
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.client.resources
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.chessBoard.resources
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.Properties.Resources.resources
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.room.resources
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.GenerateResource.cache
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.CoreCompileInputs.cache
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.exe
+C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.pdb

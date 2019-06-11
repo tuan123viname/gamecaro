@@ -25,6 +25,7 @@ namespace game_Caro_deadline_31
         public static string namePlayer;
        private string IP = "127.0.0.1";
         private int Port = 9999;
+        public static string ipAndPort;
         public static Socket Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public client()
         {
@@ -95,9 +96,13 @@ namespace game_Caro_deadline_31
                             if (dialogResult == DialogResult.Yes)
                             {
                                 acceptString = "Y:" + ip_port_server;
+                                ipAndPort = "C:" + ip_port_server;
                                 byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
                                 Client.Send(byteSend);
                                 Client.Close();
+                                Form frm = new chessBoard();
+                                frm.ShowDialog();
+                             
                             }
                             else if (dialogResult == DialogResult.No)
                             {
@@ -115,7 +120,7 @@ namespace game_Caro_deadline_31
                             //string ip_port_remove = str.Replace("Y:", string.Empty);
 
                             client.Client.Close();
-                            MessageBox.Show("Nguoi choi da dong y ghep doi");
+                         //   MessageBox.Show("Nguoi choi da dong y ghep doi");
                             if (openedForm != null)
                             {
                                 openedForm.Close();

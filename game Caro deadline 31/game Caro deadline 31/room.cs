@@ -16,6 +16,7 @@ namespace game_Caro_deadline_31
     {
         //private static List<string> listIpUser = new List<string>();
         //private static List<int> listPortUser = new List<int>();
+        public static string ipAndPort;
         private static List<string> listUser = new List<string>();
         private static Panel pnl_PlayerList;
         delegate void CreateBtnPlayerOnline(string str);
@@ -95,6 +96,7 @@ namespace game_Caro_deadline_31
             if (client.Client.Connected == true)
             {
                 string playString = "P:" + client.Client.LocalEndPoint.ToString() + ":" + ip_port[0] + ":" + ip_port[1];
+                ipAndPort="S:"+ client.Client.LocalEndPoint.ToString() + ":" + ip_port[0] + ":" + ip_port[1];
                 byte[] byteSend = Encoding.ASCII.GetBytes(playString);
                 client.Client.Send(byteSend);
               //  client.Client.Disconnect(true);

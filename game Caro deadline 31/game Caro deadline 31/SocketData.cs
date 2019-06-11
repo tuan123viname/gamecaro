@@ -18,6 +18,11 @@ namespace game_Caro_deadline_31
         public Point Point { get => point; set => point = value; }
 
         private Point point;
+        public SocketData(int command,Point point)
+        {
+            this.Command = command;
+            this.Point = point;
+        }
     }
   
 }

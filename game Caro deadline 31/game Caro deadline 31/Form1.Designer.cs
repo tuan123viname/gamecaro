@@ -52,7 +52,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(-1, 29);
+            this.panel1.Location = new System.Drawing.Point(-1, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(613, 460);
             this.panel1.TabIndex = 0;
@@ -64,7 +64,7 @@
             this.panel2.AutoSize = true;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Location = new System.Drawing.Point(615, 29);
+            this.panel2.Location = new System.Drawing.Point(615, 27);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(266, 222);
             this.panel2.TabIndex = 1;
@@ -77,7 +77,7 @@
             this.panel3.Controls.Add(this.avatar);
             this.panel3.Controls.Add(this.textBox3);
             this.panel3.Controls.Add(this.playerName);
-            this.panel3.Location = new System.Drawing.Point(615, 257);
+            this.panel3.Location = new System.Drawing.Point(615, 255);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(266, 232);
             this.panel3.TabIndex = 2;
@@ -159,14 +159,14 @@
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -174,13 +174,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 490);
+            this.ClientSize = new System.Drawing.Size(885, 488);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "chessBoard";
             this.Text = "Game caro";
+            this.Load += new System.EventHandler(this.chessBoard_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

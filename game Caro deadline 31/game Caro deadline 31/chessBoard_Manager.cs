@@ -33,7 +33,9 @@ namespace game_Caro_deadline_31
         public int CurrPlayer { get => currPlayer; set => currPlayer = value; }
         public Panel AvtPlayer { get => avtPlayer; set => avtPlayer = value; }
         public TextBox PlayerName { get => playerName; set => playerName = value; }
+        private Stack<PlayerInfo> playTimeLine;
 
+        public Stack<PlayerInfo> PlayTimeLine;
         #endregion
         #region method
         private event EventHandler endedGame;
@@ -42,8 +44,8 @@ namespace game_Caro_deadline_31
             add { endedGame += value; }
             remove { endedGame -= value; }
         }
-        private event EventHandler playerMark;
-        public event EventHandler PlayerMark
+        private event EventHandler<ButtonClickEvent> playerMark;
+        public event EventHandler<ButtonClickEvent> PlayerMark
         {
             add { playerMark += value; }
             remove { playerMark -= value; }
@@ -113,8 +115,9 @@ namespace game_Caro_deadline_31
                 return;
             }
             btn.BackgroundImage = listPlayer[CurrPlayer].Mark;
+            PlayTimeLine.Push(new PlayerInfo(getPoint(btn), CurrPlayer));
             if (playerMark != null)
-                playerMark(this, new EventArgs());
+                playerMark(this, new ButtonClickEvent(getPoint(btn)));
 
             if (isEndGame(btn) == true)
                 EndGame();
@@ -127,6 +130,25 @@ namespace game_Caro_deadline_31
            
       
         }
+        public void OtherPlayerClick(Point point)
+        {
+            Button btn = chessBoard[point.Y][point.X];
+
+            if (btn.BackgroundImage != null)
+                return;
+
+            PlayTimeLine.Push(new PlayerInfo(getPoint(btn), CurrPlayer));
+            btn.BackgroundImage = listPlayer[CurrPlayer].Mark;
+            CurrPlayer = CurrPlayer == 1 ? 0 : 1;
+
+            changePlayer();
+
+            if (isEndGame(btn))
+            {
+                EndGame();
+            }
+        }
+    
         void changePlayer()
         {
             AvtPlayer.BackgroundImage = listPlayer[CurrPlayer].Avt;
@@ -269,3 +291,19 @@ namespace game_Caro_deadline_31
         #endregion
     }
 }
+public class ButtonClickEvent : EventArgs
+{
+    private Point clickedPoint;
+
+    public Point ClickedPoint
+    {
+        get { return clickedPoint; }
+        set { clickedPoint = value; }
+    }
+
+    public ButtonClickEvent(Point point)
+    {
+        this.ClickedPoint = point;
+    }
+}
+
