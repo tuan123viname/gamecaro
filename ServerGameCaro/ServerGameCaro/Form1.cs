@@ -167,11 +167,12 @@ namespace ServerGameCaro
                         }
                         if (removeString == "Y:")
                         {
-                            foreach (Socket s in ListSocket)
+                            for (int i = 0; i < ListSocket.Count; i++)
                             {
-                                if (s.RemoteEndPoint.ToString() == ip_port_server || s.RemoteEndPoint.ToString() == client.RemoteEndPoint.ToString())
+                                if (ListSocket[i].RemoteEndPoint.ToString() == ip_port_server || ListSocket[i].RemoteEndPoint.ToString() == client.RemoteEndPoint.ToString())
                                 {
-                                    ListSocket.Remove(s);
+                                    ListSocket.Remove(ListSocket[i]);
+                                    i--;
                                 }
                             }
                         }
