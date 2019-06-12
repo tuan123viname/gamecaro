@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace game_Caro_deadline_31
 {
+    [Serializable]
     public class PlayerInfo
     {
         private Point point;

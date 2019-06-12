@@ -92,7 +92,11 @@ namespace game_Caro_deadline_31
         {
             createChessBoard();
             pnl.Enabled = true;
-            foreach(List<Button> list in chessBoard)
+            pnl.Controls.Clear();
+            PlayTimeLine = new Stack<PlayerInfo>();
+            currPlayer = 0;
+            changePlayer();
+            foreach (List<Button> list in chessBoard)
             {
                 foreach(Button btn in list)
                 {
