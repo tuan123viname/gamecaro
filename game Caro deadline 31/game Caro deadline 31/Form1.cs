@@ -18,6 +18,7 @@ namespace game_Caro_deadline_31
     [Serializable]
     public partial class chessBoard : Form
     {
+        public static bool isEndGame = false;
         public static Socket Client;
         public static Socket server;
         chessBoard_Manager board;
@@ -41,6 +42,7 @@ namespace game_Caro_deadline_31
             timer1.Stop();
             MessageBox.Show("ket thuc game");
             panel1.Enabled = false;
+            isEndGame = true;
         }
         private void Board_PlayerMark(object sender, EventArgs e)
         {
@@ -48,7 +50,9 @@ namespace game_Caro_deadline_31
             progress.Value = 0;
             PlayerInfo info=board.PlayTimeLine.Pop();
             sendData(info);
-
+            panel1.Enabled = false;
+            listenOtherPlayer();
+            
         }
 
 
@@ -122,18 +126,22 @@ namespace game_Caro_deadline_31
         }
         void createServer(string ip,int port)
         {
+            panel1.Enabled = true;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             server.Bind(ipep);
             server.Listen(1);
-            Thread thrd= new Thread(()=>{
+            Thread thrd = new Thread(() =>
+            {
                 Client = server.Accept();
-        });
-            
+            });
+            thrd.IsBackground = true;
+            thrd.Start();
+
         }
         void createClient(string ip, int port)
         {
-
+            panel1.Enabled = false;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
             Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             while (Client.Connected == false)
@@ -141,29 +149,34 @@ namespace game_Caro_deadline_31
                 try { Client.Connect(ipep); }
                 catch { };
             }
-       
+            listenOtherPlayer();
+            
         }
-        public void listenClient()
+        public void listenOtherPlayer()
         {
-            while (true)
+            Thread listenThread = new Thread(() =>
             {
                 try
                 {
                     byte[] byteReceive = new byte[1024];
                     Client.Receive(byteReceive);
-                    if (byteReceive != null)
-                    {
-                        object obj = DeserializeData(byteReceive);
-                        handleReceiveData(obj);
-                        //----------------------------------------------
-
-                    }
+                    object obj = DeserializeData(byteReceive);
+                    PlayerInfo info = (PlayerInfo)obj;
+                    board.OtherPlayerClick(info.Point);
+                    if(!isEndGame)
+                        panel1.Enabled = true;
                 }
-                catch { }
-              
-            }
-            
+                catch (Exception e)
+                {
+                }
+            });
+            listenThread.IsBackground = true;
+            listenThread.Start();
+
         }
+
+        
+
         public void sendData(Object obj)
         {
             byte[] data = new byte[1024];
@@ -210,9 +223,9 @@ namespace game_Caro_deadline_31
         {
             check();
             CheckForIllegalCrossThreadCalls = false;
-            Thread thrd = new Thread(new ThreadStart(listenClient));
-            thrd.IsBackground = true;
-            thrd.Start();
+            //Thread thrd = new Thread(new ThreadStart(listenClient));
+            //thrd.IsBackground = true;
+            //thrd.Start();
         }
     }
 }

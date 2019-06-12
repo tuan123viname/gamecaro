@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace game_Caro_deadline_31
 {
-
+    [Serializable]
     public class SocketData
     {
         private int command;

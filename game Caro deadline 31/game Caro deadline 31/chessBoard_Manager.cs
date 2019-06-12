@@ -94,7 +94,6 @@ namespace game_Caro_deadline_31
             pnl.Enabled = true;
             pnl.Controls.Clear();
             PlayTimeLine = new Stack<PlayerInfo>();
-            currPlayer = 0;
             changePlayer();
             foreach (List<Button> list in chessBoard)
             {
@@ -120,19 +119,19 @@ namespace game_Caro_deadline_31
             }
             btn.BackgroundImage = listPlayer[CurrPlayer].Mark;
             PlayTimeLine.Push(new PlayerInfo(getPoint(btn), CurrPlayer));
+
+            if (CurrPlayer == 0)
+                CurrPlayer = 1;
+            else
+                CurrPlayer = 0;
+
+            changePlayer();
+
             if (playerMark != null)
                 playerMark(this, new ButtonClickEvent(getPoint(btn)));
 
             if (isEndGame(btn) == true)
                 EndGame();
-            //change player
-            if (CurrPlayer == 0)
-                CurrPlayer = 1;
-            else
-                CurrPlayer = 0;
-            changePlayer();
-           
-      
         }
         public void OtherPlayerClick(Point point)
         {
@@ -141,9 +140,13 @@ namespace game_Caro_deadline_31
             if (btn.BackgroundImage != null)
                 return;
 
-            PlayTimeLine.Push(new PlayerInfo(getPoint(btn), CurrPlayer));
             btn.BackgroundImage = listPlayer[CurrPlayer].Mark;
-            CurrPlayer = CurrPlayer == 1 ? 0 : 1;
+            PlayTimeLine.Push(new PlayerInfo(getPoint(btn), CurrPlayer));
+
+            if (CurrPlayer == 0)
+                CurrPlayer = 1;
+            else
+                CurrPlayer = 0;
 
             changePlayer();
 
