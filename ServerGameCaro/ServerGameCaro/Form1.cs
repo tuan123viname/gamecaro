@@ -116,17 +116,18 @@ namespace ServerGameCaro
                     if (rcvString[0] == 'P')
                     {
                         string[] arrString = rcvString.Split(':');
-                        string ip1 = arrString[1];
-                        string port1 = arrString[2];
-                        string ip2 = arrString[3];
-                        string port2 = arrString[4];
-                        port2 = port2.Replace("\0", string.Empty);
+                        //string ip1 = arrString[1];
+                        //string port1 = arrString[2];
+                        string ip2 = arrString[1];
+                        string port2 = arrString[2];
+                        string name = arrString[3];
+                        name = name.Replace("\0", string.Empty);
 
                         //MessageBox.Show(ip1 + "\r\n" + port1 + "\r\n" + ip2 + "\r\n" + port2);
 
                         byte[] byteSend = new byte[1024];
                         string[] sendString = new string[1];
-                        sendString[0] = "P:" + client.RemoteEndPoint.ToString();
+                        sendString[0] = "P:" + client.RemoteEndPoint.ToString() + ":" + name;
                         byteSend = SerializeData(sendString);
                         string client2 = ip2 + ":" + port2;
                         foreach (Socket s in ListSocket)
@@ -143,19 +144,20 @@ namespace ServerGameCaro
                         byte[] byteSend = new byte[1024];
                         string[] sendString = new string[1];
                         rcvString = rcvString.Replace("\0", string.Empty);
-                        string ip_port_server;
-                        string removeString;
-                        if(rcvString[0] == 'Y')
-                        {
-                            ip_port_server = rcvString.Replace("Y:", string.Empty);
-                            removeString = "Y:";
-                            
-                        }
-                        else
-                        {
-                            ip_port_server = rcvString.Replace("N:", string.Empty);
-                            removeString = "N:";
-                        }
+                        string[] arrstr = rcvString.Split(':');
+                        string ip_port_server = arrstr[1] + ":" + arrstr[2];
+                        //string removeString;
+                        //if(rcvString[0] == 'Y')
+                        //{
+                        //    ip_port_server = rcvString.Replace("Y:", string.Empty);
+                        //    removeString = "Y:";
+
+                        //}
+                        //else
+                        //{
+                        //    ip_port_server = rcvString.Replace("N:", string.Empty);
+                        //    removeString = "N:";
+                        //}
                         sendString[0] = rcvString;
                         byteSend = SerializeData(sendString);
                         foreach (Socket s in ListSocket)
@@ -165,7 +167,7 @@ namespace ServerGameCaro
                                 s.Send(byteSend);
                             }
                         }
-                        if (removeString == "Y:")
+                        if (arrstr[0] == "Y")
                         {
                             foreach (Socket s in ListSocket)
                             {

@@ -22,8 +22,9 @@ namespace game_Caro_deadline_31
         public static List<string> IpUser=new List<string>();
         public static List<int> PortUser=new List<int>();
         public static List<string> listUser = new List<string>();
-        public static string namePlayer;
-       private string IP = "127.0.0.1";
+        public static string namePlayer = "Player 1";
+        public static string nameOtherPlayer = "Player 2";
+        private string IP = "127.0.0.1";
         private int Port = 9999;
         public static string ipAndPort;
         public static Socket Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -87,8 +88,10 @@ namespace game_Caro_deadline_31
                         string str = rcvString[0];
                         if (str[0] == 'P')
                         {
-                            string ip_port_server = rcvString[0];
-                            ip_port_server = ip_port_server.Replace("P:", string.Empty);
+                            string[] arrstr = str.Split(':');
+                            //ip_port_server = ip_port_server.Replace("P:", string.Empty);
+                            string ip_port_server = arrstr[1] + ":" + arrstr[2];
+                            string name = arrstr[3];
                             string acceptString = "";
                             //MessageBox.Show("accept");
                             //Form acc = new Accept(ip_port_server);
@@ -96,8 +99,9 @@ namespace game_Caro_deadline_31
                             DialogResult dialogResult = MessageBox.Show("Người chơi " + ip_port_server + " muốn chơi cờ với bạn. Bạn có đồng ý không ?", "Thông báo", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                acceptString = "Y:" + ip_port_server;
+                                acceptString = "Y:" + ip_port_server + ":" + name;
                                 ipAndPort = "C:" + ip_port_server;
+                                nameOtherPlayer = name;
                                 byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
                                 Client.Send(byteSend);
                                 Client.Close();
@@ -119,9 +123,12 @@ namespace game_Caro_deadline_31
                         {
                             //client.Client.Disconnect(true);
                             //string ip_port_remove = str.Replace("Y:", string.Empty);
-                            ipAndPort = str.Replace("Y", "S");
+                            string[] arrstr = str.Split(':');
+                            //ipAndPort = str.Replace("Y", "S");
+                            ipAndPort = "S:" + arrstr[1] + ":" + arrstr[2];
+                            nameOtherPlayer = arrstr[3];
                             client.Client.Close();
-                         //   MessageBox.Show("Nguoi choi da dong y ghep doi");
+                            //MessageBox.Show("Nguoi choi da dong y ghep doi");
                             if (openedForm != null)
                             {
                                 openedForm.Close();

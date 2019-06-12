@@ -95,7 +95,7 @@ namespace game_Caro_deadline_31
             //---------------------------------
             if (client.Client.Connected == true)
             {
-                string playString = "P:" + client.Client.LocalEndPoint.ToString() + ":" + ip_port[0] + ":" + ip_port[1];
+                string playString = "P:" + ip_port[0] + ":" + ip_port[1] + ":" + client.namePlayer;
                 ipAndPort="S:"+ client.Client.LocalEndPoint.ToString() + ":" + ip_port[0] + ":" + ip_port[1];
                 byte[] byteSend = Encoding.ASCII.GetBytes(playString);
                 client.Client.Send(byteSend);

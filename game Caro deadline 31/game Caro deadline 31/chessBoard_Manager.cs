@@ -13,9 +13,9 @@ namespace game_Caro_deadline_31
         public chessBoard_Manager(Panel pnl, TextBox text)
         {
             listPlayer = new List<Player>();
-            Player player1 = new Player("tuan", Image.FromFile("1.jpg"), Image.FromFile("luffy.png"), 1);
+            Player player1 = new Player(client.namePlayer, Image.FromFile("1.jpg"), Image.FromFile("luffy.png"), 1);
             listPlayer.Add(player1);
-            Player player2 = new Player("quang", Image.FromFile("2.png"), Image.FromFile("zoro.jpg"), 2);
+            Player player2 = new Player(client.nameOtherPlayer, Image.FromFile("2.png"), Image.FromFile("zoro.jpg"), 2);
             listPlayer.Add(player2);
             this.avtPlayer = pnl;
             this.PlayerName = text;
