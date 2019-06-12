@@ -19,6 +19,7 @@ namespace game_Caro_deadline_31
     public partial class chessBoard : Form
     {
         public static Socket Client;
+        public static Socket server;
         chessBoard_Manager board;
         public chessBoard()
         {
@@ -122,7 +123,7 @@ namespace game_Caro_deadline_31
         void createServer(string ip,int port)
         {
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
-            Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             server.Bind(ipep);
             server.Listen(1);
             Thread thrd= new Thread(()=>{

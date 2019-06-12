@@ -73,8 +73,8 @@ namespace game_Caro_deadline_31
         {
             while (true)
             {
-                try
-                {
+                //try
+                //{
                   
                     byte[] byteReceive = new byte[1024];
                     Client.Receive(byteReceive);
@@ -147,11 +147,11 @@ namespace game_Caro_deadline_31
 
                     }
                     //splitString();
-                }
-                catch
-                {
+                //}
+                //catch
+                //{
 
-                }
+                //}
             }
         }
 
