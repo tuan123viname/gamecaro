@@ -35,7 +35,7 @@ namespace game_Caro_deadline_31
                 Location = new Point(0, 50),
             };
        
-            tb_PlayerName.Text = client.namePlayer;
+            
           
 
         }
@@ -54,7 +54,7 @@ namespace game_Caro_deadline_31
 
         private void room_Load(object sender, EventArgs e)
         {
-            
+            lblPlayerName.Text = lblPlayerName.Text + client.namePlayer;
         }
        
         void loadUser()
