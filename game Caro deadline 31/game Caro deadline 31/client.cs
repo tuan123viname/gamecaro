@@ -23,7 +23,6 @@ namespace game_Caro_deadline_31
         public static List<int> PortUser=new List<int>();
         public static List<string> listUser = new List<string>();
         public static string namePlayer;
-        public static string avatarPath;
        private string IP = "127.0.0.1";
         private int Port = 9999;
         public static string ipAndPort;
@@ -186,14 +185,6 @@ namespace game_Caro_deadline_31
         private void client_Load(object sender, EventArgs e)
         {
             
-        }
-
-        private void btnAvatar_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            avatarPath = ofd.FileName;
-            pictureBox1.ImageLocation = avatarPath;
         }
     }
 }
