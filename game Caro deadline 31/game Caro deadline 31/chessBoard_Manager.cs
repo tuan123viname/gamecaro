@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Reflection;
 namespace game_Caro_deadline_31
 {
     public class chessBoard_Manager
@@ -79,6 +80,8 @@ namespace game_Caro_deadline_31
                         Height = contain.btnHeight,
                         Location = new Point(oldBtn.Location.X + contain.btnWidth, oldBtn.Location.Y)
                     };
+
+
                     listBtn.Add(btn);
                     btn.Tag = i.ToString();
                     
@@ -90,25 +93,33 @@ namespace game_Caro_deadline_31
         }
         public void drawChessBoard(Panel pnl)
         {
-            createChessBoard();
             pnl.Enabled = true;
             pnl.Controls.Clear();
             PlayTimeLine = new Stack<PlayerInfo>();
+            currPlayer = 0;
             changePlayer();
+            createChessBoard();
             foreach (List<Button> list in chessBoard)
             {
                 foreach(Button btn in list)
                 {
-                    pnl.Controls.Add(btn);
+                    //try
+                    //{
+                        pnl.Controls.Add(btn);
+                    //}
+                    //catch
+                    //{
+                        
+                    //    pnl.Invoke(new Action(() => pnl.Controls.Add(btn)));
+                    //}
+                    //pnl.Controls.Add(btn);
                     btn.Click += playerClick;
                    
                 }
             }
-           
-            
-
         }
-       public void playerClick(object sender, EventArgs e)
+        
+        public void playerClick(object sender, EventArgs e)
         {
            
             Button btn= sender as Button;

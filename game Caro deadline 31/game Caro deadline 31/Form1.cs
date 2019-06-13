@@ -40,9 +40,10 @@ namespace game_Caro_deadline_31
         {
             progress.Value = 0;
             timer1.Stop();
-            MessageBox.Show("ket thuc game");
+            //MessageBox.Show("ket thuc game");
             panel1.Enabled = false;
             isEndGame = true;
+            //listenOtherPlayer();
         }
         private void Board_PlayerMark(object sender, EventArgs e)
         {
@@ -51,6 +52,7 @@ namespace game_Caro_deadline_31
             PlayerInfo info=board.PlayTimeLine.Pop();
             sendData(info);
             panel1.Enabled = false;
+            //menuToolStripMenuItem.Enabled = false;
             listenOtherPlayer();
             
         }
@@ -71,13 +73,21 @@ namespace game_Caro_deadline_31
         }
 
 
-        void NewGame()
+        private void NewGame()
         {
+            //board = new chessBoard_Manager(avatar, playerName);
+            //board.PlayerMark += Board_PlayerMark;
+            //board.EndedGame += Board_EndedGame;
+
             timer1.Stop();
             progress.Value = 0;
             panel1.Controls.Clear();
             board.drawChessBoard(panel1);
+            isEndGame = false;
+            
+
         }
+
         void UndoGame()
         {
 
@@ -85,15 +95,30 @@ namespace game_Caro_deadline_31
         void QuitGame()
         {
 
+            //Client.Close();
+            //try
+            //{
+            //    server.Close();
+            //}
+            //catch
+            //{ }
+            //this.Close();
+            Application.Exit();
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Point point = new Point(-1, -1);
+            PlayerInfo info = new PlayerInfo(point, 0);
+            sendData(info);
             NewGame();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Point point = new Point(-2, -2);
+            PlayerInfo info = new PlayerInfo(point, 0);
+            sendData(info);
             QuitGame();
         }
 
@@ -141,6 +166,7 @@ namespace game_Caro_deadline_31
         }
         void createClient(string ip, int port)
         {
+            //menuToolStripMenuItem.Enabled = false;
             panel1.Enabled = false;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
             Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -152,30 +178,64 @@ namespace game_Caro_deadline_31
             listenOtherPlayer();
             
         }
-        public void listenOtherPlayer()
+        Thread listenThread;
+        static bool isNewGame = false;
+        //bool Stop = false;
+        void listenOtherPlayer()
         {
+            
             Thread listenThread = new Thread(() =>
             {
-                try
-                {
-                    byte[] byteReceive = new byte[1024];
-                    Client.Receive(byteReceive);
-                    object obj = DeserializeData(byteReceive);
-                    PlayerInfo info = (PlayerInfo)obj;
-                    board.OtherPlayerClick(info.Point);
-                    if(!isEndGame)
-                        panel1.Enabled = true;
+
+            //{
+            try
+            {
+                byte[] byteReceive = new byte[1024];
+                        Client.Receive(byteReceive);
+                        object obj = DeserializeData(byteReceive);
+                        PlayerInfo info = (PlayerInfo)obj;
+
+                    //menuToolStripMenuItem.Enabled = true;
+                    if (info.Point.X == -1)
+                    {
+                        //isNewGame = true;
+                        //Stop = true;
+
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            NewGame();
+                            panel1.Enabled = false;
+                        }));
+
+                    }
+                    else if (info.Point.X == -2)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            QuitGame();
+                        }));
+                    }
+                    else
+                    {
+                        board.OtherPlayerClick(info.Point);
+                        if (!isEndGame)
+                            panel1.Enabled = true;
+                    }
+
+                    listenOtherPlayer();
                 }
                 catch (Exception e)
                 {
+
                 }
+
             });
             listenThread.IsBackground = true;
             listenThread.Start();
 
         }
 
-        
+
 
         public void sendData(Object obj)
         {
