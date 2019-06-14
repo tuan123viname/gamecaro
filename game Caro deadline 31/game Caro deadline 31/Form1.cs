@@ -40,18 +40,21 @@ namespace game_Caro_deadline_31
         {
             progress.Value = 0;
             timer1.Stop();
-            //MessageBox.Show("ket thuc game");
+            MessageBox.Show("Kết thúc game!");
             panel1.Enabled = false;
             isEndGame = true;
             //listenOtherPlayer();
         }
         private void Board_PlayerMark(object sender, EventArgs e)
         {
-            timer1.Start();
+            //progress.Value = 0;
+            //timer1.Start();
+            timer1.Stop();
             progress.Value = 0;
-            PlayerInfo info=board.PlayTimeLine.Pop();
+            PlayerInfo info =board.PlayTimeLine.Pop();
             sendData(info);
             panel1.Enabled = false;
+
             //menuToolStripMenuItem.Enabled = false;
             listenOtherPlayer();
             
@@ -68,7 +71,12 @@ namespace game_Caro_deadline_31
             progress.Step = 2;
             progress.PerformStep();
             if (progress.Value >= 100)
+            {
+                Point point = new Point(-3, -3);
+                PlayerInfo info = new PlayerInfo(point, 0);
+                sendData(info);
                 Endgame();
+            }
 
         }
 
@@ -215,14 +223,29 @@ namespace game_Caro_deadline_31
                             QuitGame();
                         }));
                     }
+                    else if (info.Point.X == -3)
+                    {
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            Endgame();
+                        }));
+                    }
                     else
                     {
-                        board.OtherPlayerClick(info.Point);
-                        if (!isEndGame)
-                            panel1.Enabled = true;
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            board.OtherPlayerClick(info.Point);
+
+                            timer1.Start();
+                            progress.Value = 0;
+
+                            if (!isEndGame)
+                                panel1.Enabled = true;
+                        }));
+                        
                     }
 
-                    listenOtherPlayer();
+                    //listenOtherPlayer();
                 }
                 catch (Exception e)
                 {

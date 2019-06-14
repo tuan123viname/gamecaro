@@ -46,7 +46,6 @@ D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Ca
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.csproj.CoreCompileInputs.cache
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.exe
 D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game Caro deadline 31.pdb
-D:\AN\Git\gamecaro\game Caro deadline 31\game Caro deadline 31\obj\Debug\game_Caro_deadline_31.Accept.resources
 C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe.config
 C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.exe
 C:\Users\COMPUTER\source\repos\gameCaro\gamecaro\game Caro deadline 31\game Caro deadline 31\bin\Debug\game Caro deadline 31.pdb
