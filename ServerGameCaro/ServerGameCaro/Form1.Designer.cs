@@ -33,16 +33,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(294, 157);
+            this.textBox1.Location = new System.Drawing.Point(163, 135);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
             // 
             // Server
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(428, 310);
             this.Controls.Add(this.textBox1);
             this.Name = "Server";
             this.Text = "Server Game Caro";

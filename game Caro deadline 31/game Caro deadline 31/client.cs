@@ -22,8 +22,8 @@ namespace game_Caro_deadline_31
         public static List<string> IpUser=new List<string>();
         public static List<int> PortUser=new List<int>();
         public static List<string> listUser = new List<string>();
-        public static string namePlayer = "Player 1";
-        public static string nameOtherPlayer = "Player 2";
+        public static string namePlayer1 = "Player 1";
+        public static string namePlayer2 = "Player 2";
         private string IP = "127.0.0.1";
         private int Port = 9999;
         public static string ipAndPort;
@@ -41,7 +41,7 @@ namespace game_Caro_deadline_31
 
         private void btn_ConnectServer_Click(object sender, EventArgs e)
         {
-            namePlayer = tb_PlayerName.Text;
+            namePlayer1 = tb_PlayerName.Text;
             Connect();
             CheckForIllegalCrossThreadCalls = false;
             
@@ -60,24 +60,18 @@ namespace game_Caro_deadline_31
             Client.Connect(iep);
             if (Client.Connected == true)
             {
-                // namePlayer = tb_PlayerName.Text.ToString();
-                //byte[] sentByte = Encoding.ASCII.GetBytes(namePlayer);
-                //client.Send(sentByte);
+                
                 if (openedForm == null)
                 {
                     openedForm = new room();
                     openedForm.Show();
                 }
             }
-            //Client.Close();
         }
         void listenFromServer()
         {
             while (true)
             {
-                //try
-                //{
-
                     byte[] byteReceive = new byte[1024];
                     Client.Receive(byteReceive);
                     if (byteReceive != null)
@@ -89,22 +83,25 @@ namespace game_Caro_deadline_31
                         if (str[0] == 'P')
                         {
                             string[] arrstr = str.Split(':');
-                            //ip_port_server = ip_port_server.Replace("P:", string.Empty);
                             string ip_port_server = arrstr[1] + ":" + arrstr[2];
                             string name = arrstr[3];
                             string acceptString = "";
-                            //MessageBox.Show("accept");
-                            //Form acc = new Accept(ip_port_server);
-                            //acc.Show();
+                            
                             DialogResult dialogResult = MessageBox.Show("Người chơi " + ip_port_server + " muốn chơi cờ với bạn. Bạn có đồng ý không ?", "Thông báo", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                acceptString = "Y:" + ip_port_server + ":" + name;
+                                acceptString = "Y:" + ip_port_server + ":" + namePlayer1;
                                 ipAndPort = "C:" + ip_port_server;
-                                nameOtherPlayer = name;
+                                namePlayer2 = namePlayer1;
+                                namePlayer1 = name;
                                 byte[] byteSend = Encoding.ASCII.GetBytes(acceptString);
                                 Client.Send(byteSend);
                                 Client.Close();
+                                if (openedForm != null)
+                                {
+                                    openedForm.Close();
+                                    openedForm = null;
+                                }
                                 Form frm = new chessBoard();
                                 frm.ShowDialog();
                              
@@ -116,19 +113,14 @@ namespace game_Caro_deadline_31
                                 Client.Send(byteSend);
                             }
                             continue;
-                            //Mở form bàn cờ, kết nối đến người chơi đóng vai trò server bằng ip, port trong rcvString
-                          //  return;
                         }
                         if (str[0] == 'Y')
                         {
-                            //client.Client.Disconnect(true);
-                            //string ip_port_remove = str.Replace("Y:", string.Empty);
                             string[] arrstr = str.Split(':');
-                            //ipAndPort = str.Replace("Y", "S");
                             ipAndPort = "S:" + arrstr[1] + ":" + arrstr[2];
-                            nameOtherPlayer = arrstr[3];
+                            namePlayer2 = arrstr[3];
                             client.Client.Close();
-                            //MessageBox.Show("Nguoi choi da dong y ghep doi");
+                            
                             if (openedForm != null)
                             {
                                 openedForm.Close();
@@ -142,7 +134,7 @@ namespace game_Caro_deadline_31
                         }
                         if (str[0] == 'N')
                         {
-                            MessageBox.Show("Nguoi choi KHONG dong y ghep doi");
+                            MessageBox.Show("Người chơi không đồng ý ghép đôi !");
                             break;
                         }
                         //----------------------------------------------
@@ -152,22 +144,10 @@ namespace game_Caro_deadline_31
                         {
                             listUser.Add(s);
                         }
-
                     }
-                    
-                //}
-                //catch
-                //{
-
-                //}
             }
         }
 
-        //void OpenChessBoard()
-        //{
-        //    Form frm = new chessBoard();
-        //    frm.Show();
-        //}
         public byte[] SerializeData(Object o)
         {
             MemoryStream ms = new MemoryStream();

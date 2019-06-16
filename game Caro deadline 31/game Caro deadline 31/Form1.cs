@@ -47,15 +47,12 @@ namespace game_Caro_deadline_31
         }
         private void Board_PlayerMark(object sender, EventArgs e)
         {
-            //progress.Value = 0;
-            //timer1.Start();
             timer1.Stop();
             progress.Value = 0;
-            PlayerInfo info =board.PlayTimeLine.Pop();
+            PlayerInfo info =board.PlayTimeLine.Peek();
             sendData(info);
             panel1.Enabled = false;
 
-            //menuToolStripMenuItem.Enabled = false;
             listenOtherPlayer();
             
         }
@@ -77,23 +74,15 @@ namespace game_Caro_deadline_31
                 sendData(info);
                 Endgame();
             }
-
         }
-
 
         private void NewGame()
         {
-            //board = new chessBoard_Manager(avatar, playerName);
-            //board.PlayerMark += Board_PlayerMark;
-            //board.EndedGame += Board_EndedGame;
-
             timer1.Stop();
             progress.Value = 0;
             panel1.Controls.Clear();
             board.drawChessBoard(panel1);
             isEndGame = false;
-            
-
         }
 
         void UndoGame()
@@ -102,15 +91,6 @@ namespace game_Caro_deadline_31
         }
         void QuitGame()
         {
-
-            //Client.Close();
-            //try
-            //{
-            //    server.Close();
-            //}
-            //catch
-            //{ }
-            //this.Close();
             Application.Exit();
         }
 
@@ -136,13 +116,6 @@ namespace game_Caro_deadline_31
         }
         public void check()
         {
-            //string[] ipAndPort;
-            //if (room.ipAndPort!=null)
-            //  ipAndPort = room.ipAndPort.Split(':');
-            //else
-            //{
-            //    ipAndPort = client.ipAndPort.Split(':');
-            //}
             string[] ipAndPort = client.ipAndPort.Split(':');
             string ip = ipAndPort[1];
             int port = Int32.Parse(ipAndPort[2]);
@@ -154,8 +127,6 @@ namespace game_Caro_deadline_31
             {
                 createClient(ip,port);
             }
-
-          
         }
         void createServer(string ip,int port)
         {
@@ -170,11 +141,9 @@ namespace game_Caro_deadline_31
             });
             thrd.IsBackground = true;
             thrd.Start();
-
         }
         void createClient(string ip, int port)
         {
-            //menuToolStripMenuItem.Enabled = false;
             panel1.Enabled = false;
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(ip), port);
             Client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -183,38 +152,30 @@ namespace game_Caro_deadline_31
                 try { Client.Connect(ipep); }
                 catch { };
             }
+            newGameToolStripMenuItem.Enabled = false;
             listenOtherPlayer();
-            
         }
-        Thread listenThread;
-        static bool isNewGame = false;
-        //bool Stop = false;
+        
         void listenOtherPlayer()
         {
             
             Thread listenThread = new Thread(() =>
             {
 
-            //{
-            try
-            {
-                byte[] byteReceive = new byte[1024];
-                        Client.Receive(byteReceive);
-                        object obj = DeserializeData(byteReceive);
-                        PlayerInfo info = (PlayerInfo)obj;
+                try
+                {
+                    byte[] byteReceive = new byte[1024];
+                    Client.Receive(byteReceive);
+                    object obj = DeserializeData(byteReceive);
+                    PlayerInfo info = (PlayerInfo)obj;
 
-                    //menuToolStripMenuItem.Enabled = true;
                     if (info.Point.X == -1)
                     {
-                        //isNewGame = true;
-                        //Stop = true;
-
                         this.Invoke((MethodInvoker)(() =>
                         {
                             NewGame();
                             panel1.Enabled = false;
                         }));
-
                     }
                     else if (info.Point.X == -2)
                     {
@@ -234,31 +195,26 @@ namespace game_Caro_deadline_31
                     {
                         this.Invoke((MethodInvoker)(() =>
                         {
-                            board.OtherPlayerClick(info.Point);
-
                             timer1.Start();
                             progress.Value = 0;
+
+                            board.OtherPlayerClick(info.Point);
 
                             if (!isEndGame)
                                 panel1.Enabled = true;
                         }));
-                        
-                    }
 
-                    //listenOtherPlayer();
+                    }
+                    listenOtherPlayer();
                 }
                 catch (Exception e)
                 {
 
                 }
-
             });
             listenThread.IsBackground = true;
             listenThread.Start();
-
         }
-
-
 
         public void sendData(Object obj)
         {
@@ -266,22 +222,7 @@ namespace game_Caro_deadline_31
              data = SerializeData(obj);
             Client.Send(data);
         }
-        public void handleReceiveData(Object obj)
-        {
-            SocketData data = (SocketData)obj;
-            if(data.Command==1)
-            {
-                //new game
-            }
-            else if(data.Command==2)
-            {
-                board.OtherPlayerClick(data.Point);
-            }
-            else
-            {
-                //thoat game
-            }
-        }
+        
         byte[] SerializeData(Object o)
         {
             MemoryStream ms = new MemoryStream();
@@ -306,9 +247,6 @@ namespace game_Caro_deadline_31
         {
             check();
             CheckForIllegalCrossThreadCalls = false;
-            //Thread thrd = new Thread(new ThreadStart(listenClient));
-            //thrd.IsBackground = true;
-            //thrd.Start();
         }
     }
 }

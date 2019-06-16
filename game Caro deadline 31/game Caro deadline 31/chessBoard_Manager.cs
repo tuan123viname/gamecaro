@@ -14,9 +14,9 @@ namespace game_Caro_deadline_31
         public chessBoard_Manager(Panel pnl, TextBox text)
         {
             listPlayer = new List<Player>();
-            Player player1 = new Player(client.namePlayer, Image.FromFile("1.jpg"), Image.FromFile("luffy.png"), 1);
+            Player player1 = new Player(client.namePlayer1, Image.FromFile("1.jpg"), Image.FromFile("luffy.png"), 1);
             listPlayer.Add(player1);
-            Player player2 = new Player(client.nameOtherPlayer, Image.FromFile("2.png"), Image.FromFile("zoro.jpg"), 2);
+            Player player2 = new Player(client.namePlayer2, Image.FromFile("2.png"), Image.FromFile("zoro.jpg"), 2);
             listPlayer.Add(player2);
             this.avtPlayer = pnl;
             this.PlayerName = text;
@@ -101,20 +101,12 @@ namespace game_Caro_deadline_31
             createChessBoard();
             foreach (List<Button> list in chessBoard)
             {
-                foreach(Button btn in list)
+                foreach (Button btn in list)
                 {
-                    //try
-                    //{
-                        pnl.Controls.Add(btn);
-                    //}
-                    //catch
-                    //{
-                        
-                    //    pnl.Invoke(new Action(() => pnl.Controls.Add(btn)));
-                    //}
-                    //pnl.Controls.Add(btn);
+                    pnl.Controls.Add(btn);
+                    //pnl.Invoke(new Action(() => pnl.Controls.Add(btn)));
                     btn.Click += playerClick;
-                   
+
                 }
             }
         }
